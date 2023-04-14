@@ -5,6 +5,10 @@ const { NotImplementedError } = require('../extensions/index.js');
 /**
  * Implement simple binary search tree according to task description
  * using Node from extensions
+ *
+ * For example:
+ * const tree = new BinarySearchTree();
+ * tree.add(1);
  */
 
 class BinarySearchTree {
@@ -15,7 +19,7 @@ class BinarySearchTree {
   }
 
   root() {
-    return this.data ? this.data : null;
+    return this.data ? this : null;
   }
 
   add(data) {
@@ -39,7 +43,7 @@ class BinarySearchTree {
   }
 
   has(data) {
-    !!this.remove(data);
+    !!this.find(data);
   }
 
   find(data) {
@@ -63,8 +67,7 @@ class BinarySearchTree {
     function remove(node, data) {
       if (!node) {
         return null;
-      }
-      if (data < node.data) {
+      } else if (data < node.data) {
         node.left = remove(node.left, data);
         return node;
       } else if (data > node.data) {
@@ -82,6 +85,7 @@ class BinarySearchTree {
           node = node.left;
           return node;
         }
+
         let minRight = node.right;
         while (minRight.left) {
           minRight = minRight.left;
